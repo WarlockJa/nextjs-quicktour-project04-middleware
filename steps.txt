@@ -1,0 +1,22 @@
+// REST API
+static/dynaic routes
+hiding API_KEY in headers
+CRUD
+
+// Middleware
+(https://nextjs.org/docs/pages/building-your-application/routing/middleware)
+create src/middleware.ts
+
+applying matchers - matchers detect a path in the URI for which the middleware will be fired
+alternatives to matchers - detect the URI routes
+
+Middleware runs at Edge Runtimes
+Middleware usecases (limiter - limits the amount of requests to the API from the same address)
+npm i limiter
+limiter has dependencies on Node and they can't be imported at Edge Runtimes. Creating limiter instance at src/api/config/limiter.ts
+
+creating allowedOrigin list src/middleware.ts - allowing dev access from google.com.
+testing access from dev tools on google.com - it's going to be blocked because api/todos/GET response has no headers
+adding headers to api/todos/route.ts GET
+testing again - it works
+Conclusion: For CORS to work you need to specify allowedOrigin in Middleware and define 'Access-Control-Allowed-Origin' header in the endpoint response
